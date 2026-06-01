@@ -1,0 +1,41 @@
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: backEnd.dockerfile
+    container_name: encurtador-de-link
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://${DB_NAME}:5432/${DB_NAME}
+      - SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - 8080:8080
+    networks:
+      - rede-backend
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:14.23-alpine3.23
+    container_name: db_postgres
+    environment:
+      - POSTGRES_USER=${DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - 5432:5432
+    volumes:
+      - db_postgres:/var/lib/postgresql/data
+    networks:
+      - rede-backend
+    healthcheck: 
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  db_postgres:
+networks:
+  rede-backend:
+    driver: bridge
+
