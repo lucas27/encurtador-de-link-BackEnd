@@ -22,7 +22,7 @@ jobs:
           context: .
           file: ./backEnd.dockerfile
           push: true
-          tags: lucas27/encurtador-de-link:latest
+          tags: lucasbr27/encurtador-de-link:latest
           build-args: |
             DB_NAME=${{ secrets.DB_NAME }}
             DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
