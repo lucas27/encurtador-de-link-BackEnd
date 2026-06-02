@@ -1,6 +1,14 @@
 FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
 
+ARG DB_NAME
+ARG DATABASE_USERNAME
+ARG DATABASE_PASSWORD
+
+ENV DB_NAME=$DB_NAME
+ENV DATABASE_USERNAME=$DATABASE_USERNAME
+ENV DATABASE_PASSWORD=$DATABASE_PASSWORD
+
 # Copia os arquivos do projeto e baixa as dependências
 COPY pom.xml .
 RUN mvn dependency:go-offline
