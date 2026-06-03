@@ -16,7 +16,9 @@ services:
       db:
         condition: service_healthy
   db:
-    image: postgres:14.23-alpine3.23
+    build:
+      context: .
+      dockerfile: postgres.dockerfile
     container_name: db_postgres
     environment:
       - POSTGRES_USER=${DATABASE_USERNAME}
