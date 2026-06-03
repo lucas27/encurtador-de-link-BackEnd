@@ -1,4 +1,4 @@
-FROM postgres:18-alpine:3.22
+FROM postgres:14.23-alpine3.23
 
 ARG DATABASE_USERNAME
 ARG DATABASE_PASSWORD
