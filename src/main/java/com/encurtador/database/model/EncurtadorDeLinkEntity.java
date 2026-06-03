@@ -1,5 +1,7 @@
 package com.encurtador.database.model;
 
+import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,10 +25,11 @@ public class EncurtadorDeLinkEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private java.util.UUID id;
 
-    private String urlOriginal;
-    private String urlEncurtada;
+    private String url_original;
+    private String url_encurtada;
 
-    @Column(name = "data_criacao", columnDefinition = "TIMESTAMP")
-    private java.time.LocalDateTime dataCriacao;
+    @CreationTimestamp
+    @Column(columnDefinition = "TIMESTAMP", updatable = false, nullable = false)
+    private LocalDateTime data_criacao;
 
 }

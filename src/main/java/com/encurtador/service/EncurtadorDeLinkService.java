@@ -1,15 +1,10 @@
 package com.encurtador.service;
 
-import java.util.List;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.encurtador.database.model.EncurtadorDeLinkEntity;
 import com.encurtador.database.repositories.EncurtadorDeLinkRepositories;
-import com.encurtador.dtos.EncurtadorDto;
 
 @Service
 public class EncurtadorDeLinkService {
@@ -25,8 +20,8 @@ public class EncurtadorDeLinkService {
         String geradorDeId = UUID.randomUUID().toString().substring(0, 6);
 
         EncurtadorDeLinkEntity encurtador = new EncurtadorDeLinkEntity();
-        encurtador.setUrlOriginal(urlOriginal);
-        encurtador.setUrlEncurtada(geradorDeId);
+        encurtador.setUrl_original(urlOriginal);
+        encurtador.setUrl_encurtada(geradorDeId);
         
         return repositories.save(encurtador);
     }
