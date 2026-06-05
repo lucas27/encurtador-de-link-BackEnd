@@ -9,3 +9,5 @@ ENV POSTGRES_PASSWORD=$DATABASE_PASSWORD
 ENV DB_NAME=$DB_NAME
 
 EXPOSE 5432
+
+VOLUME db_postgres:/var/lib/postgresql/data

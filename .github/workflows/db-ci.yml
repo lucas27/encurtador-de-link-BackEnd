@@ -1,4 +1,4 @@
-name: encurtador-de-link-ci
+name: db-ci
 on:
   push:
     branches: [ main ]
@@ -9,15 +9,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-      
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-      
-      - name: rodar testes
-        run: mvn test
 
       - name: Login no DockerHub
         uses: docker/login-action@v3
@@ -25,13 +16,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Docker imagem build do projeto
+      - name: Docker imagem build do banco de dados
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./backEnd.dockerfile
+          file: ./postgres.dockerfile
           push: true
-          tags: lucasbr27/encurtador-de-link:latest
+          tags: lucasbr27/db-postgres:latest
           build-args: |
             DB_NAME=${{ secrets.DB_NAME }}
             DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }}
