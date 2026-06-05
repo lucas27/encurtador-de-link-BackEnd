@@ -15,7 +15,7 @@ import com.encurtador.service.EncurtadorDeLinkService;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/app/link")
+@RequestMapping
 public class EncurtadorDeLinkController {
     
     private final EncurtadorDeLinkService service;
@@ -27,7 +27,7 @@ public class EncurtadorDeLinkController {
     @PostMapping("/url")
     public String encurtarLink(@RequestBody EncurtadorDto dto) {
         EncurtadorDeLinkEntity encurtador = service.link(dto.url_original());
-        String url = "http://localhost:8080/app/link/" + encurtador.getUrl_encurtada();
+        String url = "http://localhost:8080/" + encurtador.getUrl_encurtada();
 
         return url;
     }
