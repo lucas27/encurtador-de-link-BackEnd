@@ -13,6 +13,7 @@ import com.encurtador.dtos.EncurtadorDto;
 import com.encurtador.service.EncurtadorDeLinkService;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping
@@ -33,6 +34,7 @@ public class EncurtadorDeLinkController {
     }
 
     @GetMapping("/{codigo}")
+    @NotBlank(message = "O código não pode ser vazio")
     public void obterLink(@PathVariable("codigo") String codigo, HttpServletResponse response) throws IOException{
         response.sendRedirect(service.buscarCodigo(codigo));
     }
